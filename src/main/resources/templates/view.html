@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Petitions</title>
+</head>
+<body>
+<h1>All Petitions</h1>
+
+<table border="1">
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Action</th>
+    </tr>
+
+    <tr th:each="petition : ${petitions}">
+        <td th:text="${petition.title}"></td>
+        <td th:text="${petition.description}"></td>
+        <td><a th:href="@{'/petition/' + ${petition.id}}">View & Sign</a></td>
+    </tr>
+</table>
+
+<br>
+<a href="/create">Create New Petition</a> |
+<a href="/search">Search Petitions</a>
+
+</body>
+</html>
