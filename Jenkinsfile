@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/Brindha-tech1-dot/brindhaspetitions.git'
+                git branch: 'main', url: 'https://github.com/Brindha-tech1-dot/brindhaspetitions.git'
             }
         }
         stage('Build') {
