@@ -1,32 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>All Search Results</title>
-</head>
+<head><title>Search Results</title></head>
 <body>
 <h1>Search Results</h1>
-
-<div th:if="${results.isEmpty()}">
-    <p>No petitions found.</p>
-</div>
-
-<table border="1" th:if="${!results.isEmpty()}">
-    <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th></th>
-    </tr>
-
+<table border="1">
+    <tr><th>Title</th><th>Description</th><th>Action</th></tr>
     <tr th:each="petition : ${results}">
         <td th:text="${petition.title}"></td>
         <td th:text="${petition.description}"></td>
-        <td><a th:href="@{'/petition/' + ${petition.id}}">Open</a></td>
+        <td><a th:href="@{'/petition/' + ${petition.id}}">View & Sign</a></td>
     </tr>
 </table>
-
-<br>
-<a href="/search">Search Again</a> |
-<a href="/view">View All</a>
-
+<a href="/search">Back to Search</a> | <a href="/">Back to All Petitions</a>
 </body>
 </html>

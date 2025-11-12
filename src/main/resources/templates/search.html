@@ -1,21 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Search the Petitions</title>
-</head>
+<head><title>Search Petitions</title></head>
 <body>
 <h1>Search Petitions</h1>
-
-<form action="/search" method="post">
-    <label>Enter petition title:</label><br>
-    <input type="text" name="keyword" required><br><br>
-
+<form th:action="@{/search}" method="post">
+    Keyword: <input type="text" name="keyword" /><br/>
     <button type="submit">Search</button>
 </form>
-
-<br>
-<a href="/create">Create Petition</a> |
-<a href="/view">View Petitions</a>
-
+<a href="/">Back to All Petitions</a>
 </body>
 </html>

@@ -4,22 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Petition {
-    private Long id; // changed from String to Long
+    private Long id;
     private String title;
     private String description;
     private List<Signature> signatures = new ArrayList<>();
 
-    // Default constructor
     public Petition() {}
 
-    // Constructor with fields
     public Petition(Long id, String title, String description) {
         this.id = id;
         this.title = title;
         this.description = description;
     }
 
-    // Getters & Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -30,8 +27,5 @@ public class Petition {
     public void setDescription(String description) { this.description = description; }
 
     public List<Signature> getSignatures() { return signatures; }
-
-    public void addSignature(Signature signature) {
-        this.signatures.add(signature);
-    }
+    public void addSignature(Signature signature) { this.signatures.add(signature); }
 }

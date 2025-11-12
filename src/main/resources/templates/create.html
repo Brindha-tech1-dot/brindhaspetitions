@@ -1,24 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <h1>Create the git status Petition Page</h1>
-</head>
+<head><title>Create Petition</title></head>
 <body>
-<h1>Create a New Petition</h1>
-
-<form action="/create" method="post">
-    <label>Title:</label><br>
-    <input type="text" name="title" required><br><br>
-
-    <label>Description:</label><br>
-    <textarea name="description" required></textarea><br><br>
-
-    <button type="submit">Create Petition</button>
+<h1>Create a Petition</h1>
+<form th:action="@{/create}" th:object="${petition}" method="post">
+    Title: <input type="text" th:field="*{title}" /><br/>
+    Description: <textarea th:field="*{description}"></textarea><br/>
+    <button type="submit">Create</button>
 </form>
-
-<br>
-<a href="/view">View Petitions</a> |
-<a href="/search">Search Petitions</a>
-
+<a href="/">Back to All Petitions</a>
 </body>
 </html>
