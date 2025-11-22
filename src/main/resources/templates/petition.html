@@ -8,12 +8,12 @@
     <tr th:each="petition : ${petitions}">
         <td th:text="${petition.title}"></td>
         <td th:text="${petition.description}"></td>
-        <td><a th:href="@{'/petition/' + ${petition.id}}">View & Sign</a></td>
+        <td><a th:href="@{/petition/{id}(id=${petition.id})}">View & Sign</a></td>
     </tr>
 </table>
 <p>
-    <a href="/create">Create Petition</a> |
-    <a href="/search">Search Petitions</a>
+    <a th:href="@{/create}">Create Petition</a> |
+    <a th:href="@{/search}">Search Petitions</a>
 </p>
 </body>
 </html>
