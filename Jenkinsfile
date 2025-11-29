@@ -4,11 +4,13 @@ pipeline {
     environment {
         EC2_USER = 'ubuntu'
         EC2_HOST = '13.60.188.85'
-        EC2_KEY = '/home/jenkins/.ssh/Jenkins-1.pem'
+        EC2_KEY  = '/home/jenkins/.ssh/Jenkins-1.pem'
         TOMCAT_WEBAPPS = '/var/lib/tomcat10/webapps'
+        WAR_NAME = 'brindhaspetitions.war'
     }
 
     stages {
+
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/Brindha-tech1-dot/brindhaspetitions.git'
@@ -17,7 +19,7 @@ pipeline {
 
         stage('Build WAR') {
             steps {
-                sh './mvnw clean package -DskipTests'
+                sh 'mvn clean package -DskipTests'
             }
         }
 
@@ -32,12 +34,15 @@ pipeline {
                 input message: "Deploy new WAR to EC2?", ok: "Deploy"
 
                 sh """
-                    scp -i ${EC2_KEY} target/*.war ${EC2_USER}@${EC2_HOST}:/home/${EC2_USER}/brindha.war
-                    ssh -i ${EC2_KEY} ${EC2_USER}@${EC2_HOST} "
-                        sudo rm -rf ${TOMCAT_WEBAPPS}/ROOT ${TOMCAT_WEBAPPS}/ROOT.war
-                        sudo mv /home/${EC2_USER}/brindha.war ${TOMCAT_WEBAPPS}/ROOT.war
+                    echo "Copying WAR to EC2..."
+                    scp -o StrictHostKeyChecking=no -i ${EC2_KEY} target/${WAR_NAME} ${EC2_USER}@${EC2_HOST}:/home/${EC2_USER}/
+
+                    echo "Deploying WAR to Tomcat..."
+                    ssh -o StrictHostKeyChecking=no -i ${EC2_KEY} ${EC2_USER}@${EC2_HOST} '
+                        sudo rm -rf ${TOMCAT_WEBAPPS}/brindhaspetitions ${TOMCAT_WEBAPPS}/brindhaspetitions.war
+                        sudo cp /home/${EC2_USER}/${WAR_NAME} ${TOMCAT_WEBAPPS}/
                         sudo systemctl restart tomcat10
-                    "
+                    '
                 """
             }
         }
