@@ -5,7 +5,7 @@
 <h1 th:text="${petition.title}"></h1>
 <p th:text="${petition.description}"></p>
 
-<h2>Sign this petition</h2>
+<h2>Sign these petition</h2>
 <form th:action="@{/petition/{id}/sign(id=${petition.id})}" th:object="${signature}" method="post">
     Name: <input type="text" th:field="*{name}" /><br/>
     Email: <input type="email" th:field="*{email}" /><br/>
