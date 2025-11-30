@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         EC2_USER = 'ubuntu'
-        EC2_HOST = '13.60.188.85'
+        EC2_HOST = '16.171.196.231'
         EC2_KEY  = '/home/jenkins/.ssh/Jenkins-1.pem'
         TOMCAT_WEBAPPS = '/var/lib/tomcat10/webapps'
         WAR_NAME = 'brindhaspetitions.war'
